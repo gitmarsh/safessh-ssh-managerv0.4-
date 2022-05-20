@@ -1,10 +1,10 @@
 #!/bin/bash
-sh install.sh
-source functions.sh
-usermail="$( cat .userid)"
-gpg -d -r "$usermail" --batch --passphrase-fd 0 servid.json.gpg >> servid.json 
-rm servid.json.gpg
-trap "gpg -e -r $usermail --batch --passphrase-fd 0 servid.json && rm servid.json" EXIT
+sh ~/.config/safessh/nstall.sh
+source ~/.config/safessh/functions.sh
+usermail="$( cat ~/.config/safessh/.userid)"
+gpg -d -r "$usermail" --batch --passphrase-fd 0 ~/.config/safessh/servid.json.gpg >> ~/.config/safessh/servid.json
+rm ~/.config/safessh/servid.json.gpg
+trap "gpg -e -r $usermail --batch --passphrase-fd 0 servid.json && rm ~/.config/safessh/servid.json" EXIT
 
 ###  START TITLE
 echo  "############################################################################################"

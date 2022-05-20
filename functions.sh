@@ -10,22 +10,22 @@ read -p $'\e[35mEnter server ip\e[0m: ' serverip
 read -p  $'\e[34mEnter username\e[0m: ' user
 read -p $'\e[36mEnter an  alias\e[0m: ' nickname
 
-arr0="$(cat servid.json | jq .servers[] | grep id | tail -1 | awk -F ":" '{print $2}' | awk -F '"' '{print $2}')"
+arr0="$(cat ~/.config/safessh/servid.json | jq .servers[] | grep id | tail -1 | awk -F ":" '{print $2}' | awk -F '"' '{print $2}')"
 servid="$(($arr0 + 1))"
-jq '.servers['"$arr0"'] |= .+ {"id":'\"$servid\"', "name":'\"$nickname\"', "ip":'\"$serverip\"', "user":'\"$user\"', "ssh":'\"$user@$serverip\"'}' servid.json >> newservid.json &&
-rm servid.json && mv newservid.json servid.json
+jq '.servers['"$arr0"'] |= .+ {"id":'\"$servid\"', "name":'\"$nickname\"', "ip":'\"$serverip\"', "user":'\"$user\"', "ssh":'\"$user@$serverip\"'}' ~/config/safessh/servid.json >> ~/.config/safessh/newservid.json &&
+rm ~/.config/safessh/servid.json && mv ~/.config/safessh/newservid.json ~/.config/safessh/servid.json
 echo -e "${green}New Entry Added!${reset}"
 sleep 1 
 echo""
-source menu.sh
+source ~/.config/safessh/menu.sh
 }
 function sshconnect () {
 echo -e "\n${cyan}Select a server:${reset}\n"
-cat servid.json | jq .servers[].name | cat -n
+cat ~/.config/safessh/servid.json | jq .servers[].name | cat -n
 read -r -n 1 -s answer
 
-serverid="$( cat servid.json | jq .servers[].name | sed -n "$answer"p | awk '{print $1}' )"
-sshid="$(cat servid.json | jq .servers["$answer - 1"].ssh | awk -F '"' '{print $2}')"
+serverid="$( cat ~/.config/safessh/servid.json | jq .servers[].name | sed -n "$answer"p | awk '{print $1}' )"
+sshid="$(cat ~/.config/safessh/servid.json | jq .servers["$answer - 1"].ssh | awk -F '"' '{print $2}')"
 
 ssh $sshid
 }
@@ -67,9 +67,9 @@ cat ./keymap -n
 
 }
 function list () {
-cat servid.json | jq .servers[].name | cat -n
+cat ~/.config/safessh/servid.json | jq .servers[].name | cat -n
 echo""
-source menu.sh
+source ~/.config/safessh/menu.sh
 }
 
 
