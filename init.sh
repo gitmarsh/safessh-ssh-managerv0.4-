@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+source ~/.config/safesssh/functions.sh
 usermail="$(cat .userid)"
 gpg -d -r "$usermail" --batch --passphrase-fd 0 ~/.config/safessh/servid.json.gpg >> ~/.config/safessh/servid.json
 rm ~/.config/safessh/servid.json.gpg
