@@ -1,9 +1,9 @@
 #!/bin/bash
-source ~/.config/safessh/functions.sh
-usermail="$( cat ~/.config/safessh/.userid)"
+
+usermail="$(cat .userid)"
 gpg -d -r "$usermail" --batch --passphrase-fd 0 ~/.config/safessh/servid.json.gpg >> ~/.config/safessh/servid.json
 rm ~/.config/safessh/servid.json.gpg
-trap "gpg -e -r $usermail --batch --passphrase-fd 0 servid.json && rm ~/.config/safessh/servid.json" EXIT
+trap "gpg -e -r $usermail --batch --passphrase-fd 0 ~/.config/safessh/servid.json && rm ~/.config/safessh/servid.json" EXIT
 
 ###  START TITLE
 echo  "############################################################################################"
