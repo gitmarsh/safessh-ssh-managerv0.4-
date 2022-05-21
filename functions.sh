@@ -12,12 +12,12 @@ read -p $'\e[36mEnter an  alias\e[0m: ' nickname
 
 arr0="$(cat ~/.config/safessh/servid.json | jq .servers[] | grep id | tail -1 | awk -F ":" '{print $2}' | awk -F '"' '{print $2}')"
 servid="$(($arr0 + 1))"
-jq '.servers['"$arr0"'] |= .+ {"id":'\"$servid\"', "name":'\"$nickname\"', "ip":'\"$serverip\"', "user":'\"$user\"', "ssh":'\"$user@$serverip\"'}' ~/config/safessh/servid.json >> ~/.config/safessh/newservid.json &&
+jq '.servers['"$arr0"'] |= .+ {"id":'\"$servid\"', "name":'\"$nickname\"', "ip":'\"$serverip\"', "user":'\"$user\"', "ssh":'\"$user@$serverip\"'}' ~/.config/safessh/servid.json >> ~/.config/safessh/newservid.json &&
 rm ~/.config/safessh/servid.json && mv ~/.config/safessh/newservid.json ~/.config/safessh/servid.json
 echo -e "${green}New Entry Added!${reset}"
 sleep 1 
 echo""
-source ~/.config/safessh/menu.sh
+source ~/.config/safessh/init.sh
 }
 function sshconnect () {
 echo -e "\n${cyan}Select a server:${reset}\n"
@@ -69,7 +69,7 @@ cat ./keymap -n
 function list () {
 cat ~/.config/safessh/servid.json | jq .servers[].name | cat -n
 echo""
-source ~/.config/safessh/menu.sh
+source ~/.config/safessh/init.sh
 }
 
 
