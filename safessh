@@ -11,17 +11,16 @@ export reset="\033[m"
 usermail="$(cat ~/.config/safessh/.userid)"
 trap "echo | gpg -e -r $usermail --batch --passphrase-fd 0 ~/.config/safessh/servid.json && rm ~/.config/safessh/servid.json && echo -e '${green}Credentials Successfully Re-Encrypted!! ${reset}${red}Exiting...${reset}\n'" EXIT
 
-
 ##  START TITLE
-echo -e  "${green}############################################################################################${reset}"
+echo -e "${green}############################################################################################${reset}"
 echo -e "${green}#########################${reset}${yellow} SSH QUICK CONNECT / SERVER ALIASING ${reset}${green}###############################${reset}"
 
 source ~/.config/safessh/functions.sh
 echo -e "${blue}"
 echo | sh ~/.config/safessh/decrypt.sh
 echo -e "${reset}"
-function menu () { 
-echo -e "\n${blue}Select an option:${reset}
+function menu() {
+	echo -e "\n${blue}Select an option:${reset}
 
 ${purple}1.)${reset}${cyan} Connect To Server${reset}
 
@@ -33,24 +32,27 @@ ${purple}4.)${reset}${cyan} Delete Server${reset}
 
 ${purple}5.)${reset}${cyan} Exit${reset}
 "
-read -n 1 -s firstab
-sleep 1 
-case "$firstab" in
-"1")
-sshconnect  ;;
-"2")
-list        ;;
-"3")
-newserver   ;;
-"4")
-delete      ;;
-"5")
-exit        ;;
-"6")
-exit        ;;
-esac
+	read -n 1 -s firstab
+	sleep 1
+	case "$firstab" in
+	"1")
+		sshconnect
+		;;
+	"2")
+		list
+		;;
+	"3")
+		newserver
+		;;
+	"4")
+		delete
+		;;
+	"5")
+		exit
+		;;
+	"6")
+		exit
+		;;
+	esac
 }
 menu
-
-
-

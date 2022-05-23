@@ -10,7 +10,7 @@ export grey="\033[0;37m"
 export reset="\033[m"
 
 usermail="$(cat ~/.config/safessh/.userid)"
-gpg -d -r "$usermail" --batch --passphrase-fd 0 ~/.config/safessh/servid.json.gpg >> ~/.config/safessh/servid.json
+gpg -d -r "$usermail" --batch --passphrase-fd 0 ~/.config/safessh/servid.json.gpg >>~/.config/safessh/servid.json
 echo -e "\n${green}Credentials Successfully Decrypted${reset}\n"
 
 rm ~/.config/safessh/servid.json.gpg
