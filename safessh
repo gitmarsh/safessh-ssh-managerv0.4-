@@ -8,18 +8,18 @@ export purple="\033[1;35m"
 export cyan="\033[1;36m"
 export grey="\033[0;37m"
 export reset="\033[m"
-source ~/.config/safessh/functions.sh
-echo -e "\n${yellow}Press Enter to Decrypt SSH Credentials${reset}"
 usermail="$(cat ~/.config/safessh/.userid)"
-gpg -d -r "$usermail" --batch --passphrase-fd 0 ~/.config/safessh/servid.json.gpg >> ~/.config/safessh/servid.json
-echo -e "\n${green}Credentials Successfully Decrypted${reset}\n"
-rm ~/.config/safessh/servid.json.gpg
-trap "echo -e '${yellow}Press Enter to Re-Encrypt SSH Credentials${reset}' && gpg -e -r $usermail --batch --passphrase-fd 0 ~/.config/safessh/servid.json && rm ~/.config/safessh/servid.json && echo -e '${green}Credentials Successfully Re-Encrypted!! ${reset}${red}Exiting...${reset}\n'" EXIT
+trap "echo | gpg -e -r $usermail --batch --passphrase-fd 0 ~/.config/safessh/servid.json && rm ~/.config/safessh/servid.json && echo -e '${green}Credentials Successfully Re-Encrypted!! ${reset}${red}Exiting...${reset}\n'" EXIT
 
 
 ##  START TITLE
 echo -e  "${green}############################################################################################${reset}"
-echo -e "${green}#########################${reset}${yellow} SSH QUICK CONNECT / SERVER ALIASING ${reset}${green}###############################"
+echo -e "${green}#########################${reset}${yellow} SSH QUICK CONNECT / SERVER ALIASING ${reset}${green}###############################${reset}"
+
+source ~/.config/safessh/functions.sh
+echo -e "${blue}"
+echo | sh ~/.config/safessh/decrypt.sh
+echo -e "${reset}"
 function menu () { 
 echo -e "\n${blue}Select an option:${reset}
 
@@ -51,4 +51,6 @@ exit        ;;
 esac
 }
 menu
+
+
 
