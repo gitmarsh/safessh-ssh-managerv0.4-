@@ -17,11 +17,12 @@ rm ~/.config/safessh/servid.json && mv ~/.config/safessh/newservid.json ~/.confi
 echo -e "${green}New Entry Added!${reset}"
 sleep 1 
 echo""
-source ~/.config/safessh/init.sh
+safessh
 }
 function sshconnect () {
 echo -e "\n${cyan}Select a server:${reset}\n"
 cat ~/.config/safessh/servid.json | jq .servers[].name | cat -n
+echo ""
 read -r -n 1 -s answer
 
 serverid="$( cat ~/.config/safessh/servid.json | jq .servers[].name | sed -n "$answer"p | awk '{print $1}' )"
@@ -69,7 +70,8 @@ cat ./keymap -n
 function list () {
 cat ~/.config/safessh/servid.json | jq .servers[].name | cat -n
 echo""
-source ~/.config/safessh/init.sh
+source ~/.config/safessh/menu.sh
+menu
 }
 
 
