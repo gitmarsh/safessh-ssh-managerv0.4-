@@ -6,5 +6,5 @@ Testing repository for SSH key management. This is purely for learning purposes 
 
 - Creates a centralized directory and tools for managing multple OpenSSH credentials securely
 - Utilized the gpg application for encrypting sensative log-in information for you remotes
-- JSON format making it transfers and migrations easier
+- JSON format making transfers and migrations easier
 
