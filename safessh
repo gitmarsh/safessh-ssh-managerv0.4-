@@ -9,7 +9,7 @@ export cyan="\033[1;36m"
 export grey="\033[0;37m"
 export reset="\033[m"
 usermail="$(cat ~/.config/safessh/.userid)"
-trap "echo | gpg -e -r $usermail --batch --passphrase-fd 0 ~/.config/safessh/servid.json && rm ~/.config/safessh/servid.json && echo -e '${green}Credentials Successfully Re-Encrypted!! ${reset}${red}Exiting...${reset}\n'" EXIT
+#trap "echo | gpg -e -r $usermail --batch --passphrase-fd 0 ~/.config/safessh/servid.json && rm ~/.config/safessh/servid.json && echo -e '${green}Credentials Successfully Re-Encrypted!! ${reset}${red}Exiting...${reset}\n'" EXIT
 
 ##  START TITLE
 echo -e "${green}############################################################################################${reset}"
